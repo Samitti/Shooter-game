@@ -3,7 +3,7 @@ import config from '../Config/config';
 
 export default class TitleScene extends Phaser.Scene {
   constructor () {
-    super('Title');
+    super('GameOver');
   }
 
   create () {
@@ -11,14 +11,14 @@ export default class TitleScene extends Phaser.Scene {
     this.gameButton = this.add.sprite(200, 200, 'blueButton1').setInteractive();
     this.centerButton(this.gameButton, 1);
 
-    this.gameText = this.add.text(0, 0, 'Play', { fontSize: '32px', fill: '#fff' });
+    this.gameText = this.add.text(0, 0, 'Restart', { fontSize: '32px', fill: '#fff' });
     this.centerButtonText(this.gameText, this.gameButton);
 
     this.gameButton.on('pointerdown', function (pointer) {
       this.scene.start('Game');
     }.bind(this));
 
-    this.title = this.add.text(this.game.config.width * 0.5, 128, "DRAGON FIGHTER", {
+    this.title = this.add.text(this.game.config.width * 0.5, 128, "GAME OVER", {
       fontFamily: 'monospace',
       fontSize: 48,
       fontStyle: 'bold',

@@ -7,6 +7,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload () {
+    
     this.load.image('sky', 'assets/sky.png');
     this.load.spritesheet("sprPlayer", "assets/sprPlayer.png", {
       frameWidth: 32,
@@ -24,8 +25,16 @@ export default class GameScene extends Phaser.Scene {
       frameHeight: 65
     });
 
+    this.load.spritesheet("sprExplosion", "assets/sprExplosion.png", {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+
     this.load.image("sprLaserEnemy0", "assets/sprLaserEnemy0.png");
     this.load.image("sprLaserPlayer", "assets/sprLaserPlayer.png");
+    this.load.audio("sndExplode0", "assets/sndExplode0.wav");
+    this.load.audio("sndExplode1", "assets/sndExplode1.wav");
+    this.load.audio("sndLaser", "assets/sndLaser.wav");
 
   }
 
@@ -58,6 +67,21 @@ export default class GameScene extends Phaser.Scene {
       frameRate: 5,
       repeat: -1
     });
+
+    this.anims.create({
+      key: "sprExplosion",
+      frames: this.anims.generateFrameNumbers("sprExplosion"),
+      frameRate: 20,
+      repeat: 0
+    });
+
+    this.sfx = {
+      explosions: [
+        this.sound.add("sndExplode0"),
+        this.sound.add("sndExplode1")
+      ],
+      laser: this.sound.add("sndLaser")
+    };
     
 
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -108,31 +132,60 @@ export default class GameScene extends Phaser.Scene {
       callbackScope: this,
       loop: true
     });
+
+    this.physics.add.collider(this.playerLasers, this.enemies, function(playerLaser, enemy) {
+      if (enemy) {
+        if (enemy.onDestroy !== undefined) {
+          enemy.onDestroy();
+        }
+      
+        enemy.explode(true);
+        playerLaser.destroy();
+      }
+    });
+
+    this.physics.add.overlap(this.player, this.enemies, function(player, enemy) {
+      if (!player.getData("isDead") &&
+          !enemy.getData("isDead")) {
+        player.explode(false);
+        enemy.explode(true);
+        player.onDestroy();
+      }
+    });
+
+    this.physics.add.overlap(this.player, this.enemyLasers, function(player, laser) {
+      if (!player.getData("isDead") &&
+          !laser.getData("isDead")) {
+        player.explode(false);
+        player.onDestroy();
+        laser.destroy();
+      }
+    });
   }
 
   update() {
-    this.player.update();
-
-    if (this.keyW.isDown) {
-      this.player.moveUp();
-    }
-    else if (this.keyS.isDown) {
-      this.player.moveDown();
-    }
-
-    if (this.keyA.isDown) {
-      this.player.moveLeft();
-    }
-    else if (this.keyD.isDown) {
-      this.player.moveRight();
-    }
-
-    if (this.keySpace.isDown) {
-      this.player.setData("isShooting", true);
-    }
-    else {
-      this.player.setData("timerShootTick", this.player.getData("timerShootDelay") - 1);
-      this.player.setData("isShooting", false);
+    if (!this.player.getData("isDead")) {
+      this.player.update();
+      if (this.keyW.isDown) {
+        this.player.moveUp();
+      }
+      else if (this.keyS.isDown) {
+        this.player.moveDown();
+      }
+      if (this.keyA.isDown) {
+        this.player.moveLeft();
+      }
+      else if (this.keyD.isDown) {
+        this.player.moveRight();
+      }
+    
+      if (this.keySpace.isDown) {
+        this.player.setData("isShooting", true);
+      }
+      else {
+        this.player.setData("timerShootTick", this.player.getData("timerShootDelay") - 1);
+        this.player.setData("isShooting", false);
+      }
     }
 
     for (var i = 0; i < this.enemies.getChildren().length; i++) {

@@ -9,6 +9,25 @@ class Entity extends Phaser.GameObjects.Sprite {
     this.setData("type", type);
     this.setData("isDead", false);
   }
+
+   explode() {
+    if (!this.getData("isDead")) {
+      // Set the texture to the explosion image, then play the animation
+      this.setTexture("sprExplosion");  // this refers to the same animation key we used when we added this.anims.create previously
+      this.play("sprExplosion"); // play the animation
+
+      // pick a random explosion sound within the array we defined in this.sfx in SceneMain
+      this.scene.sfx.explosions[Phaser.Math.Between(0, this.scene.sfx.explosions.length - 1)].play();
+
+      if (this.shootTimer !== undefined) {
+        if (this.shootTimer) {
+          this.shootTimer.remove(false);
+        }
+      }     
+
+      this.setData("isDead", true);
+    }
+  }
 }
 
 class Player extends Entity {
@@ -52,10 +71,23 @@ class Player extends Entity {
         var laser = new PlayerLaser(this.scene, this.x, this.y);
         this.scene.playerLasers.add(laser);
       
-        // this.scene.sfx.laser.play();
+        this.scene.sfx.laser.play();
         this.setData("timerShootTick", 0);
       }
     }
+  }
+
+  onDestroy() {
+    this.scene.time.addEvent({ // go to game over scene
+      delay: 1000,
+      callback: function() {
+        this.scene.scene.start("GameOver");
+      },
+      
+      callbackScope: this,
+      loop: false
+      
+    });
   }
   
 }
@@ -79,38 +111,38 @@ class ChaserDragon extends Entity {
   }
 
   update() {
-    if (!this.getData("isDead") && this.scene.player) {
-      if (Phaser.Math.Distance.Between(
-        this.x,
-        this.y,
-        this.scene.player.x,
-        this.scene.player.y
-      ) < 320) {
+    // if (!this.getData("isDead") && this.scene.player) {
+    //   if (Phaser.Math.Distance.Between(
+    //     this.x,
+    //     this.y,
+    //     this.scene.player.x,
+    //     this.scene.player.y
+    //   ) < 320) {
 
-        this.state = this.states.CHASE;
-      }
+    //     this.state = this.states.CHASE;
+    //   }
 
-      if (this.state == this.states.CHASE) {
-        var dx = this.scene.player.x - this.x;
-        var dy = this.scene.player.y - this.y;
+    //   if (this.state == this.states.CHASE) {
+    //     var dx = this.scene.player.x - this.x;
+    //     var dy = this.scene.player.y - this.y;
 
-        var angle = Math.atan2(dy, dx);
+    //     var angle = Math.atan2(dy, dx);
 
-        var speed = 100;
-        this.body.setVelocity(
-          Math.cos(angle) * speed,
-          Math.sin(angle) * speed
-        );
-      }
-    }
+    //     var speed = 100;
+    //     this.body.setVelocity(
+    //       Math.cos(angle) * speed,
+    //       Math.sin(angle) * speed
+    //     );
+    //   }
+    // }
 
     
-    if (this.x < this.scene.player.x) {
-      this.angle -= 2;
-    }
-    else {
-      this.angle += 2;
-    } 
+    // if (this.x < this.scene.player.x) {
+    //   this.angle -= 2;
+    // }
+    // else {
+    //   this.angle += 2;
+    // } 
   }
 }
 
