@@ -6,8 +6,11 @@ export default class TitleScene extends Phaser.Scene {
     super('GameOver');
   }
 
+  init(data) {
+    this.gameScore = 100;
+  }
+
   create () {
-    // Game
     this.gameButton = this.add.sprite(200, 200, 'blueButton1').setInteractive();
     this.centerButton(this.gameButton, 1);
 
@@ -24,8 +27,20 @@ export default class TitleScene extends Phaser.Scene {
       fontStyle: 'bold',
       color: '#ffffff',
     });
-    // this.centerButton(this.title, 2);
     this.title.setOrigin(0.5);
+
+    this.textScore = this.add.text(
+      12,
+      10,
+      `Score: ${this.gameScore}`,
+      {
+        fontFamily: 'monospace',
+        fontSize: 16,
+        color: '#ffffff',
+        align: 'center',
+      },
+    );
+
 
     this.input.on('pointerover', function (event, gameObjects) {
       gameObjects[0].setTexture('blueButton2');

@@ -6,8 +6,12 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
   }
 
-  preload () {
-    
+  init() {
+    this.score = 0;
+    this.addvalue = 0;
+  }
+
+  preload () { 
     this.load.image('sky', 'assets/sky.png');
     this.load.spritesheet("sprPlayer", "assets/sprPlayer.png", {
       frameWidth: 32,
@@ -46,6 +50,27 @@ export default class GameScene extends Phaser.Scene {
       frameRate: 20,
       repeat: -1
     });
+    
+    // this.scoreText = this.add.text(16, 16, 'SCORE', { fontSize: '32px', fill: '#000' });
+
+    // this.scoreLabel = this.add.text(this.game.config.width * 0.5, 128, "SCORE", {
+    //   fontFamily: 'monospace',
+    //   fontSize: 20,
+    //   fontStyle: 'bold',
+    //   color: '#ffffff',
+    // });
+    // this.scoreLabel.setOrigin(7,4);
+
+    this.textScore = this.add.text(
+      12,
+      10,
+      `Score: ${this.score}`,
+      {
+        fontFamily: 'monospace',
+        fontSize: 16,
+        align: 'left',
+      },
+    );
 
     this.player = new Player(
       this,
@@ -134,13 +159,15 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.physics.add.collider(this.playerLasers, this.enemies, function(playerLaser, enemy) {
-      if (enemy) {
+      this.addvalue = 15;      
+      if (enemy) { 
         if (enemy.onDestroy !== undefined) {
           enemy.onDestroy();
         }
       
         enemy.explode(true);
-        playerLaser.destroy();
+        playerLaser.destroy(); 
+        
       }
     });
 
@@ -149,7 +176,7 @@ export default class GameScene extends Phaser.Scene {
           !enemy.getData("isDead")) {
         player.explode(false);
         enemy.explode(true);
-        player.onDestroy();
+        player.onDestroy(this.score);
       }
     });
 
@@ -157,15 +184,21 @@ export default class GameScene extends Phaser.Scene {
       if (!player.getData("isDead") &&
           !laser.getData("isDead")) {
         player.explode(false);
-        player.onDestroy();
+        player.onDestroy(this.score);
         laser.destroy();
       }
     });
+  }  
+
+  addScore(amount) {
+    this.score += amount;
+    this.textScore.setText(`Score: ${this.score}`);
   }
 
   update() {
     if (!this.player.getData("isDead")) {
       this.player.update();
+      
       if (this.keyW.isDown) {
         this.player.moveUp();
       }
@@ -180,8 +213,9 @@ export default class GameScene extends Phaser.Scene {
       }
     
       if (this.keySpace.isDown) {
-        this.player.setData("isShooting", true);
+        this.player.setData("isShooting", true);          
       }
+      
       else {
         this.player.setData("timerShootTick", this.player.getData("timerShootDelay") - 1);
         this.player.setData("isShooting", false);
@@ -191,7 +225,7 @@ export default class GameScene extends Phaser.Scene {
     for (var i = 0; i < this.enemies.getChildren().length; i++) {
       var enemy = this.enemies.getChildren()[i];
 
-      enemy.update();
+      enemy.update();      
 
       if (enemy.x < -enemy.displayWidth ||
         enemy.x > this.game.config.width + enemy.displayWidth ||
