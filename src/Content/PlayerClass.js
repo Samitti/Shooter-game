@@ -1,8 +1,5 @@
 /* eslint-disable no-undef */
-/* eslint-disable import/no-unresolved */
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'Phaser';
-import { Entity } from './Entities';
+import Entity from './Entities';
 import PlayerLaser from './PlayerLaserClass';
 
 class Player extends Entity {

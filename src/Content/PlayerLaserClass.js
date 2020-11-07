@@ -1,8 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-// eslint-disable-next-line import/no-extraneous-dependencies
-// eslint-disable-next-line import/no-unresolved
-import 'Phaser';
-import { Entity } from './Entities';
+import Entity from './Entities';
 
 class PlayerLaser extends Entity {
   constructor(scene, x, y) {

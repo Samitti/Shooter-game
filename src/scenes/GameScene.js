@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import 'phaser';
-// import { FighterDragon } from '../Content/Entities';
 import Player from '../Content/PlayerClass';
 import ChaserDragon from '../Content/ChaserDragonClass';
 import SpyDragon from '../Content/SpyDragonClass';

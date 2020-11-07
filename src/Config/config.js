@@ -1,15 +1,16 @@
+/* eslint-disable no-undef */
 import 'phaser';
- 
+
 export default {
   type: Phaser.WEBGL,
   width: 800,
   height: 600,
   physics: {
-    default: "arcade",
+    default: 'arcade',
     arcade: {
-      gravity: { x: 0, y: 0 }
-    }
+      gravity: { x: 0, y: 0 },
+    },
   },
   pixelArt: true,
-  roundPixels: true
+  roundPixels: true,
 };

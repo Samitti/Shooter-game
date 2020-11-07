@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import 'phaser';
 
 class Entity extends Phaser.GameObjects.Sprite {
@@ -15,7 +16,8 @@ class Entity extends Phaser.GameObjects.Sprite {
       this.setTexture('sprExplosion');
       this.play('sprExplosion');
       this.scene.addScore(20);
-      this.scene.sfx.explosions[Phaser.Math.Between(0, this.scene.sfx.explosions.length - 1)].play();
+      this.scene.sfx.explosions[Phaser.Math.Between(0,
+        this.scene.sfx.explosions.length - 1)].play();
 
       if (this.shootTimer !== undefined) {
         if (this.shootTimer) {
@@ -29,36 +31,4 @@ class Entity extends Phaser.GameObjects.Sprite {
   }
 }
 
-class FighterDragon extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, 'sprEnemy0', 'FighterDragon');
-    this.body.velocity.y = Phaser.Math.Between(50, 100);
-    this.shootTimer = this.scene.time.addEvent({
-      delay: 1000,
-      callback() {
-        const laser = new EnemyLaser(
-          this.scene,
-          this.x,
-          this.y,
-        );
-        laser.setScale(this.scaleX);
-        this.scene.enemyLasers.add(laser);
-      },
-      callbackScope: this,
-      loop: true,
-    });
-    this.play('sprEnemy0');
-  }
-
-  onDestroy() {
-    if (this.shootTimer !== undefined) {
-      if (this.shootTimer) {
-        this.shootTimer.remove(false);
-      }
-    }
-  }
-}
-
-export {
-  Entity, FighterDragon,
-};
+export default Entity;
