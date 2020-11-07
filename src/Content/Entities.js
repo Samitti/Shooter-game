@@ -14,13 +14,13 @@ class Entity extends Phaser.GameObjects.Sprite {
     if (!this.getData("isDead")) {
       this.setTexture("sprExplosion"); 
       this.play("sprExplosion"); 
-      
+      this.scene.addScore(20);
       this.scene.sfx.explosions[Phaser.Math.Between(0, this.scene.sfx.explosions.length - 1)].play();
       
       if (this.shootTimer !== undefined) {
         if (this.shootTimer) {
           this.shootTimer.remove(false);
-          this.scene.addScore(10);
+          this.scene.addScore(20);
         }
       }     
 
@@ -76,14 +76,11 @@ class Player extends Entity {
     }
   }
 
-  onDestroy(data) {
+  onDestroy() {
     this.scene.time.addEvent({
       delay: 1000,
       callback: function() {
         this.scene.scene.start("GameOver");
-        this.scene.scene.start('GameOver', {
-          gameScore: data,
-        });
       },
       
       callbackScope: this,
@@ -105,9 +102,6 @@ class ChaserDragon extends Entity {
   constructor(scene, x, y) {
     super(scene, x, y, "sprEnemy1", "ChaserDragon");
     this.body.velocity.y = Phaser.Math.Between(50, 100);    
-  }
-  onDestroy() {
-    this.scene.addScore(15);
   }
 }
 
@@ -133,7 +127,6 @@ class FighterDragon extends Entity {
   }
 
   onDestroy() {
-    this.scene.addScore(15);
     if (this.shootTimer !== undefined) {
       if (this.shootTimer) {
         this.shootTimer.remove(false);
@@ -148,9 +141,7 @@ class SpyDragon extends Entity {
     this.body.velocity.y = Phaser.Math.Between(20, 100);
     this.play("sprEnemy2");
   }
-  onDestroy() {
-    this.scene.addScore(15);
-  }
+  
 }
 
 class EnemyLaser extends Entity {

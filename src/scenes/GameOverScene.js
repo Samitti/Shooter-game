@@ -4,11 +4,10 @@ import config from '../Config/config';
 export default class TitleScene extends Phaser.Scene {
   constructor () {
     super('GameOver');
+    this.gameScore = 0;
   }
+    
 
-  init(data) {
-    this.gameScore = 100;
-  }
 
   create () {
     this.gameButton = this.add.sprite(200, 200, 'blueButton1').setInteractive();
@@ -29,18 +28,32 @@ export default class TitleScene extends Phaser.Scene {
     });
     this.title.setOrigin(0.5);
 
+    this.gameScore = localStorage.getItem("gameScore");
+    this.highScore = localStorage.getItem("highScore");
+
     this.textScore = this.add.text(
-      12,
-      10,
-      `Score: ${this.gameScore}`,
+      290,
+      400,
+      `Your Score: ${this.gameScore}`,
       {
         fontFamily: 'monospace',
-        fontSize: 16,
+        fontSize: 32,
         color: '#ffffff',
         align: 'center',
       },
     );
 
+    this.highScore = this.add.text(
+      290,
+      300,
+      `High Score: ${this.highScore}`,
+      {
+        fontFamily: 'monospace',
+        fontSize: 32,
+        color: '#ffffff',
+        align: 'center',
+      },
+    );
 
     this.input.on('pointerover', function (event, gameObjects) {
       gameObjects[0].setTexture('blueButton2');

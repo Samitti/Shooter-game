@@ -67,10 +67,11 @@ export default class GameScene extends Phaser.Scene {
       `Score: ${this.score}`,
       {
         fontFamily: 'monospace',
-        fontSize: 16,
+        fontSize: 20,
         align: 'left',
       },
     );
+
 
     this.player = new Player(
       this,
@@ -159,7 +160,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.physics.add.collider(this.playerLasers, this.enemies, function(playerLaser, enemy) {
-      this.addvalue = 15;      
+            
       if (enemy) { 
         if (enemy.onDestroy !== undefined) {
           enemy.onDestroy();
@@ -176,7 +177,7 @@ export default class GameScene extends Phaser.Scene {
           !enemy.getData("isDead")) {
         player.explode(false);
         enemy.explode(true);
-        player.onDestroy(this.score);
+        player.onDestroy();
       }
     });
 
@@ -184,7 +185,7 @@ export default class GameScene extends Phaser.Scene {
       if (!player.getData("isDead") &&
           !laser.getData("isDead")) {
         player.explode(false);
-        player.onDestroy(this.score);
+        player.onDestroy();
         laser.destroy();
       }
     });
@@ -220,6 +221,12 @@ export default class GameScene extends Phaser.Scene {
         this.player.setData("timerShootTick", this.player.getData("timerShootDelay") - 1);
         this.player.setData("isShooting", false);
       }
+
+      localStorage.setItem("gameScore", this.score);
+      if (this.score > localStorage.getItem("highScore")) {
+        localStorage.setItem("highScore", this.score);
+      }
+
     }
 
     for (var i = 0; i < this.enemies.getChildren().length; i++) {
