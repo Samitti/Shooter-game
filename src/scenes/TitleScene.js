@@ -7,7 +7,7 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create () {
-    // Game
+    
     this.gameButton = this.add.sprite(200, 200, 'blueButton1').setInteractive();
     this.centerButton(this.gameButton, 1);
 
@@ -24,7 +24,7 @@ export default class TitleScene extends Phaser.Scene {
       fontStyle: 'bold',
       color: '#ffffff',
     });
-    // this.centerButton(this.title, 2);
+    
     this.title.setOrigin(0.5);
 
     this.input.on('pointerover', function (event, gameObjects) {
