@@ -27,7 +27,6 @@ The Game Scene is built so that a player shoots at flying dragons and destroy as
 
   ![screenshot 1](assets/sprPlayer.png)
 
-[Live Demo Link]()
 
 ## Getting Started
 To get a copy up and running follow these simple example steps:-
