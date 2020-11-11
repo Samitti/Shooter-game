@@ -20,7 +20,7 @@ export const postHighScore = async (playerName, score) => {
   }
 };
 
-export const getGameScores = async () => {
+const getGameScores = async () => {
   try {
     const rawData = await fetch(`${apiData.url}games/:${apiData.gameID}/scores/`);
     const resultArry = await rawData.json();
@@ -29,3 +29,12 @@ export const getGameScores = async () => {
     return 'Error:';
   }
 };
+
+export const getTopScore = getGameScores().then((scores) => {
+  const { result } = scores;
+
+  result.sort((x, y) => y.score - x.score);
+  if (result[0]) {
+    return result[0].score;
+  }
+});
