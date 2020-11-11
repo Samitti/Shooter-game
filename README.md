@@ -12,6 +12,8 @@
 
 ## Live Link
 
+[Live Demo Link](https://raw.githack.com/Samitti/Shooter-game/milestone_4/dist/index.html)
+
 ## Game Design
 The Game Scene is built so that a player shoots at flying dragons and destroy as many as possible before they fire the player or colide with the player.
 
