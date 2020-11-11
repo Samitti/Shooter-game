@@ -1,10 +1,10 @@
+import Phaser from 'phaser';
 import Entity from './Entities';
 import EnemyLaser from './EnemyLaserClass';
 
 class FighterDragon extends Entity {
   constructor(scene, x, y) {
     super(scene, x, y, 'sprEnemy0', 'FighterDragon');
-    // eslint-disable-next-line no-undef
     this.body.velocity.y = Phaser.Math.Between(50, 100);
     this.shootTimer = this.scene.time.addEvent({
       delay: 1000,

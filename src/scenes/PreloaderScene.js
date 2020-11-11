@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -54,6 +54,7 @@ export default class PreloaderScene extends Phaser.Scene {
     assetText.setOrigin(0.5, 0.5);
 
     this.load.on('progress', (value) => {
+      // eslint-disable-next-line radix
       percentText.setText(`${parseInt(value * 100)}%`);
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
@@ -87,7 +88,6 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.audio('sndExplode0', 'assets/sndExplode0.wav');
     this.load.audio('sndExplode1', 'assets/sndExplode1.wav');
     this.load.audio('sndLaser', 'assets/sndLaser.wav');
-
   }
 
   ready() {

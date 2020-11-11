@@ -1,6 +1,6 @@
 const apiData = {
-  url: 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/',  
-  gameID: 'mhSHXCPZ4qHkZGioVSGg'
+  url: 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/',
+  gameID: 'mhSHXCPZ4qHkZGioVSGg',
 };
 
 export const postHighScore = async (playerName, score) => {
@@ -28,8 +28,4 @@ export const getGameScores = async () => {
   } catch (error) {
     return 'Error:';
   }
-};
-
-export const handleScore = () => {
- return 500;
 };

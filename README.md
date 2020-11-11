@@ -38,6 +38,7 @@ To get a copy up and running follow these simple example steps:-
 - cd into the Shooter-game directory
 - Run `npm install` to install dependancies.
 - Run `npm start` to run the game in `http://localhost:8080/`.
+- Use keys A,S,D,W and Space to move the player for shooting. 
 
 
 ## Author

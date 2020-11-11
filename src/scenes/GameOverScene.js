@@ -1,4 +1,5 @@
-import Phaser from "phaser";
+/* eslint-disable class-methods-use-this */
+import Phaser from 'phaser';
 import config from '../Config/config';
 
 export default class TitleScene extends Phaser.Scene {

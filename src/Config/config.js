@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
 
 export default {
   type: Phaser.WEBGL,
@@ -13,5 +13,3 @@ export default {
   pixelArt: true,
   roundPixels: true,
 };
-
-
