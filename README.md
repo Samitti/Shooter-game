@@ -10,6 +10,8 @@
 - HTML
 - Jest
 
+## Live Link
+
 ## Game Design
 The Game Scene is built so that a player shoots at flying dragons and destroy as many as possible before they fire the player or colide with the player.
 
@@ -32,8 +34,8 @@ The Game Scene is built so that a player shoots at flying dragons and destroy as
 To get a copy up and running follow these simple example steps:-
 - Clone `https://github.com/Samitti/Shooter-game` to your local machine.
 - cd into the Shooter-game directory
-- Run `yarn install` to install dependancies.
-- Run `yarn webpack-dev-server` to run the game in `http://localhost:8080/`.
+- Run `npm install` to install dependancies.
+- Run `npm start` to run the game in `http://localhost:8080/`.
 
 
 ## Author
