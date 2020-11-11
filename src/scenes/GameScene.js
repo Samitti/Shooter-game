@@ -3,6 +3,7 @@ import Player from '../Content/PlayerClass';
 import ChaserDragon from '../Content/ChaserDragonClass';
 import SpyDragon from '../Content/SpyDragonClass';
 import FighterDragon from '../Content/FighterDragonClass';
+import { getScores } from '../Content/apiScore';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -57,6 +58,17 @@ export default class GameScene extends Phaser.Scene {
       12,
       10,
       `Score: ${this.score}`,
+      {
+        fontFamily: 'monospace',
+        fontSize: 20,
+        align: 'left',
+      },
+    );
+
+    this.topScoreApi = this.add.text(
+      200,
+      10,
+      'Top Score: ',
       {
         fontFamily: 'monospace',
         fontSize: 20,
@@ -176,11 +188,28 @@ export default class GameScene extends Phaser.Scene {
         laser.destroy();
       }
     });
+
+    this.topScore();
   }
 
   addScore(amount) {
     this.score += amount;
     this.textScore.setText(`Score: ${this.score}`);
+  }
+
+  async topScore() {
+    const resultObject = await getScores();
+
+    if (Array.isArray(resultObject.result)) {
+      this.scores = resultObject.result.sort((a, b) => ((a.score > b.score) ? -1 : 1));
+
+      for (let i = 0; i < 1; i += 1) {
+        this.topScoreApi.setText(`Score: ${this.scores[i].score}`);
+        localStorage.setItem('highScore', this.scores[i].score);
+      }
+    } else {
+      this.topScoreApi.setText(`Score: ${resultObject}`);
+    }
   }
 
   update() {
@@ -206,9 +235,6 @@ export default class GameScene extends Phaser.Scene {
       }
 
       localStorage.setItem('gameScore', this.score);
-      if (this.score > localStorage.getItem('highScore')) {
-        localStorage.setItem('highScore', this.score);
-      }
     }
 
     for (let i = 0; i < this.enemies.getChildren().length; i += 1) {

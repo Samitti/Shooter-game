@@ -1,5 +1,4 @@
-import '@babel/polyfill';
-import * as ApiScore from '../Content/apiScore';
+import * as ApiScore from '../src/Content/PlayerClass';
 
 global.fetch = require('jest-fetch-mock');
 
@@ -13,4 +12,4 @@ describe('Posting Score to Api ', () => {
     const result = await ApiScore.postHighScore('Sami', 10);
     expect(result).toBe(true);
   });
-};
+});

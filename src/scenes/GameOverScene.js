@@ -1,11 +1,15 @@
+/* eslint-disable radix */
 /* eslint-disable class-methods-use-this */
 import Phaser from 'phaser';
 import config from '../Config/config';
+import { postScore } from '../Content/apiScore';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
     super('GameOver');
     this.gameScore = 0;
+    this.myScore = 0;
+    this.savedScore = 0;
   }
 
 
@@ -29,11 +33,14 @@ export default class TitleScene extends Phaser.Scene {
     this.title.setOrigin(0.5);
 
     this.gameScore = localStorage.getItem('gameScore');
+    this.myScore = parseInt(this.gameScore);
     this.highScore = localStorage.getItem('highScore');
+    this.savedScore = parseInt(this.highScore);
+
 
     this.textScore = this.add.text(
-      290,
-      400,
+      270,
+      300,
       `Your Score: ${this.gameScore}`,
       {
         fontFamily: 'monospace',
@@ -44,8 +51,8 @@ export default class TitleScene extends Phaser.Scene {
     );
 
     this.highScore = this.add.text(
-      290,
-      300,
+      270,
+      250,
       `High Score: ${this.highScore}`,
       {
         fontFamily: 'monospace',
@@ -55,6 +62,21 @@ export default class TitleScene extends Phaser.Scene {
       },
     );
 
+    this.congra = this.add.text(
+      150,
+      500,
+      ' ',
+      {
+        fontFamily: 'monospace',
+        fontSize: 32,
+        color: 'pink',
+        align: 'center',
+      },
+    );
+
+    this.checkHighScore();
+
+
     this.input.on('pointerover', (event, gameObjects) => {
       gameObjects[0].setTexture('blueButton2');
     });
@@ -62,6 +84,22 @@ export default class TitleScene extends Phaser.Scene {
     this.input.on('pointerout', (event, gameObjects) => {
       gameObjects[0].setTexture('blueButton1');
     });
+  }
+
+  checkHighScore() {
+    if (this.myScore > this.savedScore) {
+      this.congra.setText('CONGRATULATIONS NEW HIGH SCORE!!');
+
+      this.gameButton2 = this.add.sprite(395, 400, 'blueButton1').setInteractive();
+      this.centerButton(this.gameButton, 1);
+
+      this.gameText = this.add.text(0, 0, 'Submit Score', { fontSize: '25px', fill: '#fff' });
+      this.centerButtonText(this.gameText, this.gameButton2);
+
+      this.gameButton2.on('pointerdown', () => {
+        postScore('NewHighScore', this.gameScore);
+      });
+    }
   }
 
   centerButton(gameObject, offset = 0) {
