@@ -1,12 +1,10 @@
-/* eslint-disable no-undef */
-import 'phaser';
+import Phaser from "phaser";
 import config from './Config/config';
-import GameScene from './Scenes/GameScene';
 import BootScene from './Scenes/BootScene';
 import PreloaderScene from './Scenes/PreloaderScene';
 import TitleScene from './Scenes/TitleScene';
+import GameScene from './Scenes/GameScene';
 import GameOverScene from './Scenes/GameOverScene';
-
 
 class Game extends Phaser.Game {
   constructor() {
@@ -16,6 +14,9 @@ class Game extends Phaser.Game {
     this.scene.add('Title', TitleScene);
     this.scene.add('Game', GameScene);
     this.scene.add('GameOver', GameOverScene);
+
+    
+
     this.scene.start('Boot');
   }
 }

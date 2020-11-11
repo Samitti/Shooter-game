@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-import 'phaser';
+import Phaser from "phaser";
 
 class Entity extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, key, type) {

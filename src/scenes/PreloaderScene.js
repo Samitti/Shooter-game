@@ -1,6 +1,4 @@
-/* eslint-disable radix */
-/* eslint-disable no-undef */
-import 'phaser';
+import Phaser from "phaser";
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -80,7 +78,16 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.load.image('blueButton1', 'assets/ui/blue_button02.png');
     this.load.image('blueButton2', 'assets/ui/blue_button03.png');
-    this.load.image('phaserLogo', 'assets/logo.png');
+    this.load.image('blueButton2', 'assets/ui/sprEnemy0.png');
+    this.load.image('blueButton2', 'assets/ui/sprEnemy1.png');
+    this.load.image('blueButton2', 'assets/ui/sprEnemy2.png');
+    this.load.image('blueButton2', 'assets/ui/sprLaserEnemy0.png');
+    this.load.image('blueButton2', 'assets/ui/sprLaserEnemy0.png');
+    this.load.image('blueButton2', 'assets/ui/sprLaserPlayer.png');
+    this.load.audio('sndExplode0', 'assets/sndExplode0.wav');
+    this.load.audio('sndExplode1', 'assets/sndExplode1.wav');
+    this.load.audio('sndLaser', 'assets/sndLaser.wav');
+
   }
 
   ready() {

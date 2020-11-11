@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-import 'phaser';
+import Phaser from "phaser";
 import Player from '../Content/PlayerClass';
 import ChaserDragon from '../Content/ChaserDragonClass';
 import SpyDragon from '../Content/SpyDragonClass';
