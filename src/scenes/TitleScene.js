@@ -15,7 +15,7 @@ export default class TitleScene extends Phaser.Scene {
     this.centerButtonText(this.gameText, this.gameButton);
 
     this.gameButton.on('pointerdown', () => {
-      this.scene.start('Game');
+      this.scene.start('Input');
     });
 
     this.title = this.add.text(this.game.config.width * 0.5, 128, 'DRAGON FIGHTER', {

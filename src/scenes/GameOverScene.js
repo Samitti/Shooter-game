@@ -36,6 +36,7 @@ export default class TitleScene extends Phaser.Scene {
     this.myScore = parseInt(this.gameScore);
     this.highScore = localStorage.getItem('highScore');
     this.savedScore = parseInt(this.highScore);
+    this.playerName = localStorage.getItem('DHplayerName');
 
 
     this.textScore = this.add.text(
@@ -74,6 +75,15 @@ export default class TitleScene extends Phaser.Scene {
       },
     );
 
+    this.gameButton3 = this.add.sprite(395, 400, 'blueButton1').setInteractive();
+
+    this.gameText = this.add.text(0, 0, 'Leaderboard', { fontSize: '25px', fill: '#fff' });
+    this.centerButtonText(this.gameText, this.gameButton3);
+
+    this.gameButton3.on('pointerdown', () => {
+      // this.scene.start('Leaderboard');
+    });
+
     this.checkHighScore();
 
 
@@ -97,7 +107,7 @@ export default class TitleScene extends Phaser.Scene {
       this.centerButtonText(this.gameText, this.gameButton2);
 
       this.gameButton2.on('pointerdown', () => {
-        postScore('NewHighScore', this.gameScore);
+        postScore(this.playerName, this.gameScore);
       });
     }
   }
