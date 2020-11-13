@@ -65,7 +65,7 @@ export default class TitleScene extends Phaser.Scene {
 
     this.congra = this.add.text(
       150,
-      500,
+      450,
       ' ',
       {
         fontFamily: 'monospace',
@@ -75,13 +75,13 @@ export default class TitleScene extends Phaser.Scene {
       },
     );
 
-    this.gameButton3 = this.add.sprite(395, 400, 'blueButton1').setInteractive();
+    this.gameButton3 = this.add.sprite(395, 390, 'blueButton1').setInteractive();
 
     this.gameText = this.add.text(0, 0, 'Leaderboard', { fontSize: '25px', fill: '#fff' });
     this.centerButtonText(this.gameText, this.gameButton3);
 
     this.gameButton3.on('pointerdown', () => {
-      // this.scene.start('Leaderboard');
+      this.scene.start('Leaderboard');
     });
 
     this.checkHighScore();
@@ -100,7 +100,7 @@ export default class TitleScene extends Phaser.Scene {
     if (this.myScore > this.savedScore) {
       this.congra.setText('CONGRATULATIONS NEW HIGH SCORE!!');
 
-      this.gameButton2 = this.add.sprite(395, 400, 'blueButton1').setInteractive();
+      this.gameButton2 = this.add.sprite(395, 530, 'blueButton1').setInteractive();
       this.centerButton(this.gameButton, 1);
 
       this.gameText = this.add.text(0, 0, 'Submit Score', { fontSize: '25px', fill: '#fff' });
@@ -108,6 +108,7 @@ export default class TitleScene extends Phaser.Scene {
 
       this.gameButton2.on('pointerdown', () => {
         postScore(this.playerName, this.gameScore);
+        this.scene.start('Title');
       });
     }
   }

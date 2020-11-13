@@ -34,6 +34,15 @@ export default class TitleScene extends Phaser.Scene {
     this.input.on('pointerout', (event, gameObjects) => {
       gameObjects[0].setTexture('blueButton1');
     });
+
+    this.gameButton3 = this.add.sprite(400, 300, 'blueButton1').setInteractive();
+
+    this.gameText = this.add.text(0, 0, 'Leaderboard', { fontSize: '25px', fill: '#fff' });
+    this.centerButtonText(this.gameText, this.gameButton3);
+
+    this.gameButton3.on('pointerdown', () => {
+      this.scene.start('Leaderboard');
+    });
   }
 
   centerButton(gameObject, offset = 0) {

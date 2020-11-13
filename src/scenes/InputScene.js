@@ -40,6 +40,14 @@ export default class InputScene extends Phaser.Scene {
         color: '#ffffff',
       });
 
+    this.alertMsg = this.add.text(250, 400,
+      '', {
+        fontFamily: 'monospace',
+        fontSize: 25,
+        fontStyle: 'bold',
+        color: 'red',
+      });
+
     this.gameText = this.add.text(0, 0, 'Start', { fontSize: '32px', fill: '#fff' });
     this.centerButtonText(this.gameText, this.gameButton);
 
@@ -49,7 +57,7 @@ export default class InputScene extends Phaser.Scene {
         nameInput.style.display = 'none';
         this.scene.start('Game');
       } else {
-        alert('Please Enter Your Name!');
+        this.alertMsg.setText('Alert: Name Required!');
       }
     });
 
