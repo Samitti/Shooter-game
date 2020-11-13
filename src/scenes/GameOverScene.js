@@ -12,7 +12,6 @@ export default class TitleScene extends Phaser.Scene {
     this.savedScore = 0;
   }
 
-
   create() {
     this.gameButton = this.add.sprite(200, 200, 'blueButton1').setInteractive();
     this.centerButton(this.gameButton, 1);

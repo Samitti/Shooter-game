@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 import config from '../Config/config';
 import { getScores } from '../Content/apiScore';
 
-
 export default class LeaderboardScene extends Phaser.Scene {
   constructor() {
     super('Leaderboard');

@@ -40,6 +40,9 @@ To get a copy up and running follow these simple example steps:-
 - Run `npm start` to run the game in `http://localhost:8080/`.
 - Use keys A,S,D,W and Space, to move the player and for shooting dragons. 
 
+## Automated Tests
+> npm run test
+
 
 ## Author
 

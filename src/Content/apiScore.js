@@ -32,16 +32,4 @@ const getScores = async () => {
   throw new Error('Error!');
 };
 
-
-// const apiTopScore = getScores().then((scores) => {
-//   const { result } = scores;
-
-//   result.sort((x, y) => y.score - x.score);
-//   for (let i = 0; i < 1; i += 1) {
-//     if (result[i]) {
-//       return result[i].score;
-//     }
-//   }
-// });
-
 export { getScores, postScore };
