@@ -15,17 +15,19 @@
 [Live Demo Link](https://raw.githack.com/Samitti/Shooter-game/milestone_4/dist/index.html)
 
 ## Game Design
-The Game Scene is built so that a player shoots at flying dragons and destroy as many as possible before they fire the player or colide with the player.
+The main objective of this project was to build a platform game. I got inspiration from Zenva Academy Tutorial to implement the game design, different scenes, and scoring system. I collected some of the game assets from free license resources and customized them using photoshop, and some of the sound effects from Zenva Academy Tutorial.
+- The Game logic is that a player shoots at flying dragons and destroy as many as possible before they fire the player or collide with the player.
+- the scoring system is designed on the type of dragon. In this case, the player gets a higher score whenever destroying the fighter dragons.
 
 - There are three types of enemy dragons 
 
 ![screenshot 1](assets/sprEnemy0.png)
 
-- The red dragons, which are very dangerous and give you higher score if you destroy them
+- The red dragons, which are very dangerous and give you a higher score if you destroy them
 
 ![screenshot 1](assets/sprEnemy1.png) ![screenshot 1](assets/sprEnemy2.png)
 
-- The green and the puple ones which are less dangerous than the red ones and give you less score than the red ones if you destroy them. 
+- The green and the purple ones are less dangerous than the red ones and give you less score than the red ones if you destroy them. 
 
 - There is one fully armed fighter jet for the player that can destroy any dragon. 
 
@@ -36,9 +38,13 @@ The Game Scene is built so that a player shoots at flying dragons and destroy as
 To get a copy up and running follow these simple example steps:-
 - Clone `https://github.com/Samitti/Shooter-game` to your local machine.
 - cd into the Shooter-game directory
-- Run `npm install` to install dependancies.
+- Run `npm install` to install dependencies.
 - Run `npm start` to run the game in `http://localhost:8080/`.
-- Use keys A,S,D,W and Space, to move the player and for shooting dragons. 
+### How to play
+- Once the game starts running in the browser follow the instructions. 
+- Click keys A, S, D, W to move away from the dragons and their fire.
+- Click the space bar to fire on the dragons.
+- The more you destroy the red dragons the higher the score you get. 
 
 ## Automated Tests
 > npm run test
@@ -54,11 +60,4 @@ To get a copy up and running follow these simple example steps:-
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
-
-Feel free to check the [issues page](https://github.com/Samitti/Shooter-game/issues).
-
-## Show your support
-
-Give a ⭐️ if you like this project!
-
+Contributions, issues, and feature requests are welcome!

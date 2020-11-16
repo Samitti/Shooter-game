@@ -7,7 +7,13 @@ export default class TitleScene extends Phaser.Scene {
     super('Title');
   }
 
+  preload() {
+    this.load.audio('theme', ['assets/TownTheme.mp3']);
+  }
+
   create() {
+    // this.musicOn = true;
+    // this.soundOn = true;
     this.gameButton = this.add.sprite(200, 200, 'blueButton1').setInteractive();
     this.centerButton(this.gameButton, 1);
 
@@ -17,6 +23,11 @@ export default class TitleScene extends Phaser.Scene {
     this.gameButton.on('pointerdown', () => {
       this.scene.start('Input');
     });
+
+    // eslint-disable-next-line no-unused-vars
+    const bgMusic = this.sound.add('theme');
+    // bgMusic.play();
+
 
     this.title = this.add.text(this.game.config.width * 0.5, 128, 'DRAGON FIGHTER', {
       fontFamily: 'monospace',

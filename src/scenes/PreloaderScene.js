@@ -87,7 +87,8 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('blueButton2', 'assets/ui/sprLaserPlayer.png');
     this.load.audio('sndExplode0', 'assets/sndExplode0.wav');
     this.load.audio('sndExplode1', 'assets/sndExplode1.wav');
-    this.load.audio('sndLaser', 'assets/sndLaser.wav');
+    this.load.audio('sndExplode1', 'assets/sndExplode1.wav');
+    this.load.audio('bgMusic', 'assets/TownTheme.mp3');
   }
 
   ready() {

@@ -2,8 +2,11 @@ import Phaser from 'phaser';
 import Player from '../Content/PlayerClass';
 import ChaserDragon from '../Content/ChaserDragonClass';
 import SpyDragon from '../Content/SpyDragonClass';
+import game from '../Content/Game';
+import score from '../Content/Score';
 import FighterDragon from '../Content/FighterDragonClass';
 import { getScores } from '../Content/apiScore';
+
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -16,6 +19,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
+    this.gameStatus = game(true);
     this.load.image('sky', 'assets/sky.png');
     this.load.spritesheet('sprPlayer', 'assets/sprPlayer.png', {
       frameWidth: 32,
@@ -193,7 +197,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   addScore(amount) {
-    this.score += amount;
+    this.score = score(this.score, amount);
     this.textScore.setText(`Score: ${this.score}`);
   }
 
